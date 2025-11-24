@@ -66,7 +66,6 @@ numpy
    - Detection confidence histogram
    - Team distribution
    - Dominant jersey colors
-   - Heat map of positions on the field
    - Final result with offside line
 
 ## Processing Pipeline
