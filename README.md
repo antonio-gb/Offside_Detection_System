@@ -1,40 +1,40 @@
 # Offside_Detection_System
 
-#  Detector de Offside con IA
+#  Offside Detector with AI
 
-Sistema de visión artificial para detección automática de posiciones de offside en fútbol, utilizando YOLO para detección de jugadores y CLIP para clasificación de equipos.
+Artificial Vision System that automatically detects offsides in football, it detects the players using YOLO and divides the players into different teams using CLIP.
 
-##  Descripción
+##  Description
 
-Este proyecto implementa un pipeline completo de visión por computadora que:
+This porject implements a complete computer vision pipeline that:
 
-1. **Detecta jugadores** en imágenes de partidos de fútbol usando YOLOv8
-2. **Clasifica equipos** automáticamente mediante CLIP (Vision Transformer)
-3. **Calcula homografía** para proyectar posiciones de imagen a coordenadas reales del campo
-4. **Permite selección manual** del jugador que marca la línea de offside
-5. **Determina automáticamente** qué jugadores están en posición adelantada
-6. **Genera visualizaciones** y métricas cuantitativas del análisis
+1. **Detects Players** in images using a retrained YOLOv11 model
+2. **Classifies teams** automatically through CLIP (Vision Transformer)
+3. **Calculates Homography** to project image positions onto real coordinates in the field
+4. **Allows manual selection** of the player marking the offside line
+5. **Automatically determines** which players are in an offside position
+6. **Generate visualizations** and quantitative metrics from the analysis
 
-##  Características
+##  Features
 
-- Detección robusta de jugadores con modelo YOLO personalizado
-- Clasificación automática de equipos sin entrenamiento previo (CLIP)
-- Transformación perspectiva campo-imagen mediante homografía
-- Identificación automática de porteros por posición
-- Análisis de offside con selección interactiva
-- Métricas cuantitativas: histogramas, distribuciones, heatmaps
-- Preprocesamiento adaptativo de imágenes
+- Robust player detection with custom YOLO model
+- Automatic team classification without prior training (CLIP)
+- Field-to-image perspective transformation using homography
+- Automatic goalkeeper identification by position
+- Offside analysis with interactive selection
+- Quantitative metrics: histograms, distributions, heatmaps
+- Adaptive image preprocessing
 
-## Tecnologías Utilizadas
+## Technologies Used
 
-- **YOLOv8** (Ultralytics) - Detección de objetos
-- **CLIP** (OpenAI) - Clasificación de equipos por color de camiseta
-- **OpenCV** - Procesamiento de imágenes y homografía
-- **scikit-learn** - Clustering K-means
-- **PyTorch** - Backend de CLIP
-- **Matplotlib/Seaborn** - Visualizaciones y métricas
+- **YOLOv11 Retrained** (Ultralytics) - Object detection (If the retrained model is not detected, the program automatically uses YOLOv8)
+- **CLIP** (OpenAI) - Classification of teams by jersey color
+- **OpenCV** - Image processing and homography
+- **scikit-learn** - K-means clustering
+- **PyTorch** - CLIP backend
+- **Matplotlib/Seaborn** - Visualizations and metrics
 
-## Requisitos
+## Requirements
 ```bash
 ultralytics
 opencv-python-headless
@@ -47,106 +47,105 @@ clip (OpenAI)
 numpy
 ```
 
-## Cómo ejecutar
+## How tu run
 
-### En Google Colab (Recomendado)
+### In Google Colab (Recommended)
 
-1. **Sube tu modelo entrenado** `best.pt` a `/content/`
+1. **Upload your trained model** `best.pt` to `/content/`
 
-2. **Copia el código completo** en una celda de Colab
+2. **Copy the entire code** into a Colab cell
 
-3. **Ejecuta la celda** - El sistema te pedirá:
-   - Subir imágenes del partido
-   - Seleccionar el jugador que marca la línea de offside
+3. **Run the cell** - The system will ask you to:
+   - Upload images of the match
+   - Select the player marking the offside line
 
-4. **Visualiza los resultados** - El sistema mostrará:
-   - Imagen preprocesada
-   - Jugadores detectados y numerados
-   - Clasificación por equipos
-   - Histograma de confianzas de detección
-   - Distribución de equipos
-   - Colores dominantes de camisetas
-   - Mapa de calor de posiciones en el campo
-   - Resultado final con línea de offside
+4. **View the results** - The system will display:
+   - Preprocessed image
+   - Detected and numbered players
+   - Team classification
+   - Detection confidence histogram
+   - Team distribution
+   - Dominant jersey colors
+   - Heat map of positions on the field
+   - Final result with offside line
 
-## Pipeline de Procesamiento
+## Processing Pipeline
 ```
-1. Preprocesamiento
-   └─> Mejora adaptativa de calidad de imagen
+1. Preprocessing
+   └─> Adaptive image quality enhancement
 
-2. Homografía
-   └─> Cálculo de transformación perspectiva campo-imagen
+2. Homography
+   └─> Calculation of field-image perspective transformation
 
-3. Detección YOLO
-   └─> Identificación de todos los jugadores
-   └─> Generación de histograma de confianzas
+3. YOLO detection
+   └─> Identification of all players
+   └─> Generation of confidence histogram
 
-4. Visualización Inicial
-   └─> Jugadores numerados sin clasificar
+4. Initial visualization
+   └─> Unclassified numbered players
 
-5. Clasificación CLIP
-   └─> Agrupación automática en equipos
-   └─> Análisis de distribución y balance
-   └─> Visualización de colores dominantes
+5. CLIP classification
+   └─> Automatic grouping into teams
+   └─> Distribution and balance analysis
+   └─> Visualization of dominant colors
 
-6. Cálculo de Posiciones
-   └─> Proyección a coordenadas reales del campo
-   └─> Identificación de porteros
-   └─> Generación de heatmap de posiciones
+6. Position Calculation
+   └─> Projection to actual field coordinates
+   └─> Identification of goalkeepers
+   └─> Generation of position heatmap
 
-7. Selección Manual
-   └─> Usuario indica jugador que marca línea de offside
+7. Manual selection
+   └─> User indicates player marking the offside line
 
-8. Análisis de Offside
-   └─> Determinación automática de jugadores en posición adelantada
-   └─> Análisis por dirección de ataque
+8. Offside analysis
+   └─> Automatic determination of players in an advanced position
+   └─> Analysis by direction of attack
 
-9. Resultado Final
-   └─> Visualización completa con línea de offside
-   └─> Estadísticas y estado final
+9. Final result
+   └─> Complete visualization with offside line
+   └─> Statistics and final status
 ```
 
-## Código de Colores
+## Color Code
 
-- **Verde** - Equipo 0
-- **Rojo** - Equipo 1
-- **Naranja** - Jugador que marca la línea de offside
-- **Magenta** - Jugadores en posición de offside
-- **Gris** - Jugadores sin clasificar
+- **Green** - Team 0
+- **Red** - Team 1
+- **Orange** - Player marking the offside line
+- **Magenta** - Players in an offside position
+- **Gray** - Unclassified players
 
-## Métricas Generadas
+## Generated Metrics
 
-1. **Histograma de Confianzas** - Distribución de confianza de detecciones YOLO
-2. **Distribución de Equipos** - Gráfico de barras con balance de jugadores
-3. **Colores Dominantes** - Visualización del color promedio de cada equipo
-5. **Estadísticas de Detección** - Media, mediana, desviación estándar
+1. **Confidence Histogram** - Confidence distribution of YOLO detections
+2. **Team Distribution** - Bar chart showing player balance
+3. **Dominant Colors** - Visualization of the average color of each team
+5. **Detection Statistics** - Mean, median, standard deviation
 
-## Configuración
+## Configuration
 
-### Ajustar confianza de detección
+### Adjust detection confidence
 
-Para ajustar la confianza simplemente debemos cambiar el valor
+To adjust confidence, simply change the value
 
 ```python
 persons = detector.detect(frame, conf=0.25)  
 ```
 
-### Modificar dimensiones del campo
+### Modify field dimensions
 ```python
 homography = RobustHomography(field_length=105.0, field_width=68.0)
 ```
 
-### Cambiar modelo YOLO
+### Change YOLO model
 ```python
-detector = PlayerDetector(model_path="/ruta/a/tu/modelo.pt")
+detector = PlayerDetector(model_path=“/path/to/your/model.pt”)
 ```
+## Notes
 
-## Notas
-
-- El modelo `best.pt` es una version re-entrenada de YOLO11 utilizada para este programa
-- Las clases detectadas dependen de cómo fue entrenado el modelo utilizado
-- La homografía funciona mejor con imágenes desde ángulos elevados
-- La clasificación CLIP funciona mejor con camisetas de colores contrastantes
+- The `best.pt` model is a retrained version of YOLO11 used for this program
+- The classes detected depend on how the model used was trained
+- Homography works best with images from high angles
+- CLIP classification works best with T-shirts in contrasting colors
 
 
 
