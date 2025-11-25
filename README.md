@@ -146,7 +146,28 @@ detector = PlayerDetector(model_path=“/path/to/your/model.pt”)
 - Homography works best with images from high angles
 - CLIP classification works best with T-shirts in contrasting colors
 
+## Ablation Studies and Preliminary Experiments
 
+Before implementing the final version of the Offside Detection System, several ablation experiments were conducted to evaluate the impact of different detection and team-classification strategies. These tests provided key insights into the limitations of simpler approaches and guided the design of the full pipeline.
+
+1. **YOLOv8-Only Detection** (No Team Classification)
+
+The initial prototype relied exclusively on a YOLOv8 model for player detection without any additional team-classification mechanism. While YOLOv8 delivered strong detection accuracy and performed well in standard scenarios, it exhibited a consistent limitation:
+- Frequent confusion between players from different teams, as the model does not infer team identity from visual appearance.
+- Incorrect grouping of players, which significantly affected the reliability of offside calculations, especially in crowded scenes or when jersey colors were similar.
+
+This experiment demonstrated that robust offside analysis requires an explicit and automated team-classification step beyond object detection alone.
+
+2. **YOLOv11  + Manual Team Assignment**
+
+A second experiment used YOLOv11 in its base, non-retrained version, combined with a manual procedure in which the user was required to assign each detected player to a team. This configuration produced moderately improved results:
+- YOLOv11 yielded more stable detections and better localization than YOLOv8 in some cases.
+- Manual team assignment reduced team-mixing errors, producing cleaner team separation.
+
+However, this approach introduced a critical usability drawback:
+- Manual labeling was slow, repetitive, and impractical, especially for sequences with many players or multiple frames.
+
+These limitations highlighted the need for an automated solution that combines high-quality detection with reliable and fully autonomous team classification.
 
 
 
