@@ -115,10 +115,8 @@ numpy
 
 ## Generated Metrics
 
-1. **Confidence Histogram** - Confidence distribution of YOLO detections
-2. **Team Distribution** - Bar chart showing player balance
-3. **Dominant Colors** - Visualization of the average color of each team
-5. **Detection Statistics** - Mean, median, standard deviation
+1. **Confusion Matrix** - Confusion Matrix showing the precision of the model.
+2. **Accuracy** - Show the accuracy of the model with a specific example.
 
 ## Configuration
 
